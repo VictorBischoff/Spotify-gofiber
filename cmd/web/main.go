@@ -6,6 +6,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/template/html"
 
+	"github.com/victorbischoff/GOFIBER-TMPL/database"
 	"github.com/victorbischoff/GOFIBER-TMPL/pkg/routers"
 )
 
@@ -21,6 +22,8 @@ func main() {
 	app.Static("/", "./public", fiber.Static{
 		Compress: true,
 	})
+
+	database.InitDatabase()
 
 	routers.Routers(app)
 
