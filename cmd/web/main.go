@@ -11,7 +11,8 @@ import (
 )
 
 func main() {
-
+	database.InitDatabase()
+	
 	engine := html.New("./public", ".gohtml")
 	engine.Reload(true)
 
@@ -23,7 +24,7 @@ func main() {
 		Compress: true,
 	})
 
-	database.InitDatabase()
+	
 
 	routers.Routers(app)
 
