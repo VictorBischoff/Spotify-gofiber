@@ -42,6 +42,7 @@ func CompleteAuth(w http.ResponseWriter, r *http.Request) {
 
 	// use the token to get an authenticated client
 	client := spotify.New(auth.Client(r.Context(), tok))
+	fmt.Println("Access Token:" + tok.AccessToken + "\n")
 	fmt.Fprintf(w, "Login Completed!")
 	ch <- client
 }
@@ -50,7 +51,7 @@ func RegHand(w http.ResponseWriter, r *http.Request) {
 	log.Println("Got request for:", r.URL.String())
 
 	url := auth.AuthURL(state)
-	fmt.Println("Please log in to Spotify by visiting the following page in your browser:", url)
+	fmt.Println("Please log in to Spotify by visiting the following page in your browser:", url+"\n")
 
 	// wait for auth to complete
 	client := <-ch
