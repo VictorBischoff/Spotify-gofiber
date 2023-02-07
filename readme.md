@@ -3,18 +3,31 @@
 ## Usage:
 
 1. Clone the repo
-```ZSH
+
+```BASH
 git clone git@github.com:VictorBischoff/GoFiber-Postgres.git
 ```
+
 2. Enter the repo directory
-```ZSH
+
+```BASH
 cd GoFiber-Postgres
 ```
-3. Install dependencies
-```ZSH
+
+3. Run postgres
+
+```BASH
+docker compose up -d
+```
+
+4. Install dependencies
+
+```BASH
 go mod tidy
 ```
-4. run the fiber server, and access at http://localhost:1312
-```ZSH
+
+5. run the fiber server, and access at http://localhost:1312
+
+```BASH
 go run cmd/web/*.go
 ```
