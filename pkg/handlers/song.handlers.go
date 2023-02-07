@@ -10,11 +10,11 @@ import (
 )
 
 // Indexhandler is for healthchecking the api.
-func IndexHandler(c *fiber.Ctx) error {
-	return c.Render("index", fiber.Map{
-		"Title": "Fiber-template",
-	})
-}
+//func IndexHandler(c *fiber.Ctx) error {
+//	return c.Render("index", fiber.Map{
+//		"Title": "Fiber-template",
+//	})
+//}
 
 // GetSongs returns all the songs that are stored in the database in json format.
 func GetSongs(c *fiber.Ctx) error {

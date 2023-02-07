@@ -13,6 +13,7 @@ type Config struct {
 	DBPort         string `mapstructure:"POSTGRES_PORT"`
 
 	ClientOrigin string `mapstructure:"CLIENT_ORIGIN"`
+
 }
 
 // LoadConfig will load the enviroment variables from app.env using the above Config struct.

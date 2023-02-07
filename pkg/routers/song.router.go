@@ -8,9 +8,9 @@ import (
 
 // Routers defines the CRUD requests for the fiber application. 
 // each endpoint has a function related to it.
-func Routers(app *fiber.App) {
+func SongRouters(app *fiber.App) {
 	//index router
-	app.Get("/", handlers.IndexHandler)
+	//app.Get("/", handlers.IndexHandler)
 
 	app.Get("/api/v1/song", handlers.GetSongs)
 	app.Get("/api/v1/song/:id", handlers.GetSong)

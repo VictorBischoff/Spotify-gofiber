@@ -39,7 +39,7 @@ func Server(port string) {
 
 	
 
-	routers.Routers(app)
+	routers.AllRouters(app)
 
 	log.Fatal(app.Listen(port))
 
