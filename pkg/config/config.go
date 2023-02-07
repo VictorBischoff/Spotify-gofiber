@@ -14,6 +14,8 @@ type Config struct {
 
 	ClientOrigin string `mapstructure:"CLIENT_ORIGIN"`
 
+	SPOTIFY_ID string `mapstructure:"SPOTIFY_ID"`
+	SPOTIFY_SECRET string `mapstructure:"SPOTIFY_SECRET"`
 }
 
 // LoadConfig will load the enviroment variables from app.env using the above Config struct.

@@ -9,17 +9,29 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/zmb3/spotify/v2"
 	spotifyauth "github.com/zmb3/spotify/v2/auth"
+
+	"github.com/victorbischoff/GOFIBER-TMPL/pkg/config"
 )
 
 const redirectURI = "http://localhost:8080/callback"
 
+func loadenv() config.Config{
+	config, err := config.LoadConfig("./app.env")
+	if err != nil {
+		log.Fatalln("Failed to load environment variables! \n", err.Error())
+	}
+	return config
+}
+
+
 var (
-	auth  = spotifyauth.New(spotifyauth.WithRedirectURL(redirectURI), spotifyauth.WithClientID("e0ce8d1c45dd455e852fa98ead9961df"), spotifyauth.WithClientSecret("8bab204d97fb4fcea989cc22eeaf18dd"), spotifyauth.WithScopes(spotifyauth.ScopeUserReadPrivate))
+	auth  = spotifyauth.New(spotifyauth.WithRedirectURL(redirectURI), spotifyauth.WithClientID(loadenv().SPOTIFY_ID),spotifyauth.WithClientSecret(loadenv().SPOTIFY_SECRET), spotifyauth.WithScopes(spotifyauth.ScopeUserReadPrivate))
 	ch    = make(chan *spotify.Client)
 	state = "abc123"
 )
 
 func CompleteAuth(w http.ResponseWriter, r *http.Request) {
+
 	tok, err := auth.Token(r.Context(), state, r)
 	if err != nil {
 		http.Error(w, "Couldn't get token", http.StatusForbidden)
@@ -36,7 +48,7 @@ func CompleteAuth(w http.ResponseWriter, r *http.Request) {
 	ch <- client
 }
 
-func RequestHandler(c *fiber.Ctx)  {
+func RequestHandler(c *fiber.Ctx) {
 	log.Println("Got request for:", c.Path())
 
 	url := auth.AuthURL(state)
@@ -51,9 +63,7 @@ func RequestHandler(c *fiber.Ctx)  {
 	}
 	fmt.Println("You are logged in as:", user.ID)
 
-	
 }
-
 
 func RegHand(w http.ResponseWriter, r *http.Request) {
 	log.Println("Got request for:", r.URL.String())
