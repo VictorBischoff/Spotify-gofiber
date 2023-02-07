@@ -37,8 +37,6 @@ func Server(port string) {
 		AllowHeaders: "Origin, Content-Type, Accept",
 	}))
 
-	
-
 	routers.AllRouters(app)
 
 	log.Fatal(app.Listen(port))
