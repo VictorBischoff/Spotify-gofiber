@@ -26,7 +26,7 @@ docker compose up -d
 go mod tidy
 ```
 
-5. run the fiber server, and access at http://localhost:1312
+5. run the fiber server, and access at http://localhost:8080
 
 ```BASH
 go run cmd/web/*.go
