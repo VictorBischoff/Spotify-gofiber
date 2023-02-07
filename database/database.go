@@ -14,7 +14,7 @@ import (
 
 var DBConn *gorm.DB
 
-
+// InitDatabase is the function used to initialize the database, run migrations and it uses the enviroment variables loaded in the config.go file.
 func InitDatabase(config *config.Config) {
 	var err error
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Asia/Shanghai", config.DBHost, config.DBUserName, config.DBUserPassword, config.DBName, config.DBPort)

@@ -9,12 +9,14 @@ import (
 	"github.com/victorbischoff/GOFIBER-TMPL/pkg/models"
 )
 
+// Indexhandler is for healthchecking the api.
 func IndexHandler(c *fiber.Ctx) error {
 	return c.Render("index", fiber.Map{
 		"Title": "Fiber-template",
 	})
 }
 
+// GetSongs returns all the songs that are stored in the database in json format.
 func GetSongs(c *fiber.Ctx) error {
 	db := database.DBConn
 	var songs []models.Song
@@ -22,6 +24,7 @@ func GetSongs(c *fiber.Ctx) error {
 	return c.JSON(songs)
 }
 
+// GetSong returns one song using the id that is stored in the database table in json format.
 func GetSong(c *fiber.Ctx) error {
 	id, err := c.ParamsInt("id")
 	if err != nil {
@@ -33,6 +36,7 @@ func GetSong(c *fiber.Ctx) error {
 	return c.JSON(song)
 }
 
+// AddSong allows the client to add a new song to the database, and return the result in json format.
 func AddSong(c *fiber.Ctx) error {
 	db := database.DBConn
 	var song *models.Song = &models.Song{}
@@ -46,6 +50,7 @@ func AddSong(c *fiber.Ctx) error {
 	return c.JSON(song)
 }
 
+//TODO
 func UpdateSong(c *fiber.Ctx) error {
 	id := c.Params("id")
 	db := database.DBConn
@@ -62,6 +67,7 @@ func UpdateSong(c *fiber.Ctx) error {
 	return c.JSON("song updated")
 }
 
+// DeleteSong will delete a song by using the id 
 func DeleteSong(c *fiber.Ctx) error {
 	id := c.Params("id")
 	db := database.DBConn

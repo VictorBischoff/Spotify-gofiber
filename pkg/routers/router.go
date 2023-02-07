@@ -6,6 +6,8 @@ import (
 	"github.com/victorbischoff/GOFIBER-TMPL/pkg/handlers"
 )
 
+// Routers defines the CRUD requests for the fiber application. 
+// each endpoint has a function related to it.
 func Routers(app *fiber.App) {
 	//index router
 	app.Get("/", handlers.IndexHandler)
