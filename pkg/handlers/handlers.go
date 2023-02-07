@@ -1,6 +1,8 @@
 package handlers
 
 import (
+	"fmt"
+
 	"github.com/gofiber/fiber/v2"
 
 	"github.com/victorbischoff/GOFIBER-TMPL/database"
@@ -33,17 +35,31 @@ func GetSong(c *fiber.Ctx) error {
 
 func AddSong(c *fiber.Ctx) error {
 	db := database.DBConn
-	var song models.Song
+	var song *models.Song = &models.Song{}
 
-	song.Title = "CREAM"
-	song.Rating = 5
-	song.Artist = "Wu-tang-clan"
+	if err := c.BodyParser(song); err != nil {
+		fmt.Println("error = ", err)
+		return c.SendStatus(200)
+	}
+
 	db.Create(&song)
 	return c.JSON(song)
 }
 
 func UpdateSong(c *fiber.Ctx) error {
-	return c.SendString("UPDATE SONGS")
+	id := c.Params("id")
+	db := database.DBConn
+	var song models.Song
+
+	db.First(&song, id)
+
+	if song.Title == "" {
+		c.Status(500).SendString("no song with the id")
+		return db.Error
+	}
+
+	db.Update("wu", &song)
+	return c.JSON("song updated")
 }
 
 func DeleteSong(c *fiber.Ctx) error {
@@ -60,7 +76,5 @@ func DeleteSong(c *fiber.Ctx) error {
 
 	db.Delete(&song)
 	return c.JSON("Song deleted")
-
-
 
 }
