@@ -1,17 +1,17 @@
-# Golang Fiber using Postgres.
+# Access Spotify Web Api using GoFiber.
 <img src="./ghsrc/embed.png"></img>
 ## Usage:
 
 1. Clone the repo
 
 ```BASH
-git clone git@github.com:VictorBischoff/GoFiber-Postgres.git
+git clone git@github.com:VictorBischoff/Spotify-gofiber.git
 ```
 
 2. Enter the repo directory
 
 ```BASH
-cd GoFiber-Postgres
+cd Spotify-gofiber
 ```
 
 3. Run postgres
